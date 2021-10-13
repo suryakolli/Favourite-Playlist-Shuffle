@@ -1,0 +1,63 @@
+<html>
+    <head>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+        <link href="/static/style.css" rel="stylesheet">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    </head>
+    <body>
+
+    <h1 class="text-center" id="title">
+        <svg width="50px" height="50px" style="transform: scale(.5);" viewBox="0 0 167.5 167.5">
+            <path fill="currentColor" style="fill:#ffffff;" d="M83.7 0C37.5 0 0 37.5 0 83.7c0 46.3 37.5 83.7 83.7 83.7 46.3 0 83.7-37.5 83.7-83.7S130 0 83.7 0zM122 120.8c-1.4 2.5-4.6 3.2-7 1.7-19.8-12-44.5-14.7-73.7-8-2.8.5-5.6-1.2-6.2-4-.2-2.8 1.5-5.6 4-6.2 32-7.3 59.6-4.2 81.6 9.3 2.6 1.5 3.4 4.7 1.8 7.2zM132.5 98c-2 3-6 4-9 2.2-22.5-14-56.8-18-83.4-9.8-3.2 1-7-1-8-4.3s1-7 4.6-8c30.4-9 68.2-4.5 94 11 3 2 4 6 2 9zm1-23.8c-27-16-71.6-17.5-97.4-9.7-4 1.3-8.2-1-9.5-5.2-1.3-4 1-8.5 5.2-9.8 29.6-9 78.8-7.2 109.8 11.2 3.7 2.2 5 7 2.7 10.7-2 3.8-7 5-10.6 2.8z"></path>
+        </svg>
+        Surya's Playlists
+    </h1>
+
+    <div class="row" style="margin-top: 5%">
+        <div class="col-md-6 flexy">
+                <p>SONG PLAYING FROM PLAYLIST</p>
+                    <img
+                        src={{playlist_image}}
+                        class="img-thumbnail"
+                        height="200px"
+                        width="200px" />
+                <h1 class="playlist_name"> {{playlist_name}} </h1>
+                <h3 class="playlist_description"> {{ playlist_description}} </h3>
+
+        </div>
+        <div class="col-md-6 flexy">
+            <div style="padding-left: 25%; padding-right: 25%">
+                <p>NOW PLAYING</p>
+                <img
+                    src={{track_image}}
+                    class="img-thumbnail"
+                    height="170px"
+                    width="170px" />
+                <h5 title={{ track_name }} class="track_name">{{ track_name }}</h5>
+                <p>{{ artist_name }}</p>
+                <audio controls autoplay>
+                    <source src={{preview_url}} type="audio/ogg">
+                    Your browser does not support the audio element.
+                </audio>
+            </div>
+        </div>
+    </div>
+
+    <div class="text-center" style="margin-top: 20px">
+        <p id="info">
+            Track released on {{info}}
+        </p>
+        <a
+            target="_blank"
+            href={{lyrics}}
+            type="button"
+            class="btn btn-success btn-lg"
+            {{is_lyrics_available}}>
+            Click here for lyrics
+        </a>
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    </body>
+</html>
