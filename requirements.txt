@@ -4,3 +4,4 @@ requests
 lyricsgenius
 Flask-Login
 Flask-SQLAlchemy
+psycopg2
