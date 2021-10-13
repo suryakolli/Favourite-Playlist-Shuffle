@@ -16,14 +16,15 @@
         {{ username }}'s  Favourite Playlists
     </h1>
 
-    <div class="row">
-        <div class="col-md-4"></div>
-        <div class="col-md-4">
+    <div class="row" style="margin-top: 50px">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
             <form method="POST" action="/add-favourite">
                 <div class="input-group mb-3">
                     <input
                             type="text"
                             class="form-control"
+                            name="playlist_id"
                             placeholder="Enter Playlist's ID"
                             aria-label="Playlist ID"
                             aria-describedby="button-addon">
@@ -33,8 +34,9 @@
                             id="button-addon">Add</button>
                 </div>
             </form>
+            <p class="text-muted">Use these ID's as example: 7ptNGdPb6EriG64EWXhZoc , 2JBJkOFwobFRy9HQTYP8mI , 5lZ5yLZLc3wMM4a0Uwb2Pv</p>
         </div>
-        <div class="col-md-4"></div>
+        <div class="col-md-3"></div>
     </div>
 
 
@@ -78,12 +80,10 @@
             href={{lyrics}}
             type="button"
             class="btn btn-success btn-lg lyrics"
-            {{is_lyrics_available}}>
+            {{is_lyrics_available}} >
             Click here for lyrics
         </a>
     </div>
 
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-    </body>
+ </body>
 </html>

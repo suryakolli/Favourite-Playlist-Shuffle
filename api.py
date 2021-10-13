@@ -29,24 +29,21 @@ class SpotifyAPI(object):
         client_secret = self.client_secret
         if client_secret is None or client_id is None:
             raise Exception("You must set client_id and client_secret")
-        client_creds = f"{client_id}:{client_secret}"
-        client_creds_b64 = base64.b64encode(client_creds.encode())
-        return client_creds_b64.decode()
+        client_credentials = f"{client_id}:{client_secret}"
+        client_credentials_b64 = base64.b64encode(client_credentials.encode())
+        return client_credentials_b64.decode()
 
     def get_token_headers(self):
-        client_creds_b64 = self.get_client_credentials()
+        client_credentials_b64 = self.get_client_credentials()
         return {
-            "Authorization": f"Basic {client_creds_b64}"
-        }
-
-    def get_token_data(self):
-        return {
-            "grant_type": "client_credentials"
+            "Authorization": f"Basic {client_credentials_b64}"
         }
 
     def perform_auth(self):
         token_url = self.token_url
-        token_data = self.get_token_data()
+        token_data = {
+            "grant_type": "client_credentials"
+        }
         token_headers = self.get_token_headers()
         r = requests.post(token_url, data=token_data, headers=token_headers)
         if r.status_code not in range(200, 299):

@@ -6,7 +6,7 @@ import random
 import html
 import os
 from dotenv import load_dotenv
-from flask_login import LoginManager, current_user, login_user
+from flask_login import LoginManager, current_user, login_user, logout_user
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import login_required, UserMixin
 
@@ -74,6 +74,7 @@ def signup_user_route():
 # render login page
 @app.route('/login')
 def login():
+    logout_user()
     return flask.render_template("login.html")
 
 
@@ -91,10 +92,13 @@ def login_user_route():
 
 
 @app.route('/add-favourite', methods=["POST"])
+@login_required
 def add_favourite():
     playlist_id = flask.request.form.get('playlist_id')
+    print(playlist_id)
     try:
-        api.client.get_resource(playlist_id)
+        response = api.client.get_resource(playlist_id)
+        print(response)
     except (ValueError, Exception):
         flask.flash("Playlist Not Found")
         return flask.redirect(flask.url_for('index'))
@@ -105,7 +109,6 @@ def add_favourite():
             username=current_user.username
         ))
     db.session.commit()
-
     return flask.redirect(flask.url_for('home'))
 
 
@@ -120,10 +123,18 @@ genius = Genius(os.getenv('genius_access_token', ""))
 
 
 @app.route('/home')
-@login_required
 def home():
-    playlists = ["7ptNGdPb6EriG64EWXhZoc", "2JBJkOFwobFRy9HQTYP8mI", "5lZ5yLZLc3wMM4a0Uwb2Pv"]
-    response = api.client.get_resource(playlists[random.randint(0, len(playlists) - 1)])
+    playlists = Playlist.query.filter_by(username=current_user.username).all()
+    if len(playlists) > 0:
+        return play_song(playlists)
+    else:
+        return flask.render_template('no_playlists.html',
+                                     username=current_user.username)
+
+
+def play_song(playlists):
+    response = api.client.get_resource(getattr(playlists[random.randint(0, len(playlists) - 1)], 'playlist_id'))
+
     playlist_image = response['images'][0]['url']
     playlist_name = response['name']
     playlist_description = html.unescape(response['description'])

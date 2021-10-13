@@ -85,3 +85,7 @@ audio {
     from { opacity: 0; }
     to   { opacity: 1; }
 }
+
+#title {
+    text-transform: capitalize;
+}
