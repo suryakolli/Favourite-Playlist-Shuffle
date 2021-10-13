@@ -2,5 +2,5 @@ Flask
 python-dotenv
 requests
 lyricsgenius
-flask-login
+Flask-Login
 Flask-SQLAlchemy
