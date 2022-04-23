@@ -7,6 +7,21 @@
 </head>
 <body>
 
+    <nav class="navbar navbar-expand-lg navbar-dark" style="margin-bottom:100px; background-color: #1ed760; color:black; padding-left: 10px">
+        
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+          <div class="navbar-nav">
+            <a class="nav-item nav-link"  style="color:black; font-size: 20px; padding-left: 10px; padding-right: 10px"  href="/"><u><b>Home</b></u></a>
+            <a class="nav-item nav-link active"   style="color:black; font-size: 20px; padding-left: 10px; padding-right: 10px" href="/about">About us</a>
+            <a class="nav-item nav-link"   style="color:black; font-size: 20px; padding-left: 10px; padding-right: 10px" href="/desc">Description</a>
+            <a class="nav-item nav-link"   style="color:black; font-size: 20px; padding-left: 10px; padding-right: 10px" href="/checklist">Checklist</a>
+            <a class="nav-item nav-link"   style="color:black; font-size: 20px; padding-left: 10px; padding-right: 10px" href="/login">Reset</a>
+          </div>
+        </div>
+      </nav>
 
 
 <h1 class="text-center" id="title">
@@ -28,6 +43,7 @@
             <div class="input-group mb-3">
                 <input
                         type="text"
+                        id="pl_id"
                         name="playlist_id"
                         class="form-control"
                         placeholder="Enter Playlist's ID"
@@ -36,6 +52,7 @@
                 <button
                         class="btn btn-success"
                         type="submit"
+                        onclick="document.getElementById('pl_id').value === '' ? alert('Please enter valid playlist id') : true"
                         id="button-addon">Add</button>
             </div>
         </form>

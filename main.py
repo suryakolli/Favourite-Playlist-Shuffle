@@ -40,7 +40,7 @@ class Playlist(db.Model):
     def get_playlist_id(self):
         return self.playlist_id
 
-
+# db.drop_all()
 db.create_all()
 
 login_manager = LoginManager()
@@ -99,6 +99,9 @@ def add_favourite():
     try:
         response = api.client.get_resource(playlist_id)
         print(response)
+        if len(response) == 0:
+            flask.flash("Playlist Not Found")
+            return flask.redirect(flask.url_for('home'))
     except (ValueError, Exception):
         flask.flash("Playlist Not Found")
         return flask.redirect(flask.url_for('index'))
@@ -132,9 +135,24 @@ def home():
                                      username=current_user.username)
 
 
+
+@app.route('/about')
+def about():
+    return flask.render_template('about.html')
+
+
+@app.route('/desc')
+def desc():
+    return flask.render_template('desc.html')
+
+@app.route('/checklist')
+def checklist():
+    return flask.render_template('checklist.html')
+
+
 def play_song(playlists):
     response = api.client.get_resource(getattr(playlists[random.randint(0, len(playlists) - 1)], 'playlist_id'))
-
+    
     playlist_image = response['images'][0]['url']
     playlist_name = response['name']
     playlist_description = html.unescape(response['description'])
